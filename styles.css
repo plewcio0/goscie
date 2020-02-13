@@ -1,11 +1,21 @@
-#dashboard{
-    margin: 30px;
-}
-.table{
-    margin-top: 30px;
+html {
+    box-sizing: border-box;
 }
 
-.employeeForm{
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    background: rgb(2, 0, 36);
+    background: linear-gradient(356deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 13%, rgba(6, 84, 170, 1) 48%, rgba(0, 212, 255, 1) 100%);
+    margin: 0;
+    display: flex;
+}
+
+.employeeForm {
     margin: 20 80 80 80px;
     display: none;
 }
@@ -14,14 +24,33 @@
     display: none;
 }
 
-div.dropdown-menu a{
-    cursor: pointer;
-} 
-
-td.deleteEmployee{
+div.dropdown-menu a {
     cursor: pointer;
 }
 
-td.editEmployee{
+td.deleteEmployee {
     cursor: pointer;
+}
+
+td.editEmployee {
+    cursor: pointer;
+}
+
+.container {
+    margin-top: 100px;
+    width: 100%;
+    height: 80vh;
+    /* background: rgb(0, 212, 255);
+    background: linear-gradient(356deg, rgba(0, 212, 255, 0.07326680672268904) 0%, rgba(0, 212, 255, 1) 100%); */
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.header {
+    text-align: center;
+    margin: 20px 0 20px 0;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    color: white;
 }
