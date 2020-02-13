@@ -1,0 +1,11 @@
+{
+    "hosting": {
+        "site": "goscieweselni-2020",
+        "public": "public",
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ]
+    }
+}
