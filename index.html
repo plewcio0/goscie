@@ -17,6 +17,27 @@
     <!-- custom styles -->
     <link rel="stylesheet" href="styles.css">
 
+    <!-- Firebase Files -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase.js"></script>
+    <!-- <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
+
+    <!-- Initialize firebase  -->
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDoe2cT0kTG8H7NBDLBDBmIrlP976cbdhs",
+            authDomain: "goscieweselni-2020.firebaseapp.com",
+            databaseURL: "https://goscieweselni-2020.firebaseio.com",
+            projectId: "goscieweselni-2020",
+            storageBucket: "goscieweselni-2020.appspot.com",
+            messagingSenderId: "725142437524",
+            appId: "1:725142437524:web:6abe814b3392116f0c3e81",
+            measurementId: "G-MVEL6Z08ZC"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
     <!-- initialize script -->
     <script src="initialize.js"></script>
     <!-- filtering scripts -->
