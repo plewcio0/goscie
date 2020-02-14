@@ -29,11 +29,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.5);
 }
 
 .footer {
-    color: white;
     margin-top: 40px;
 }
 
@@ -43,9 +42,12 @@ body {
     padding: 5px;
 }
 
+.guestSelect {
+    color: black;
+}
+
 .header {
     font-weight: bold;
-    color: white;
     text-align: center;
     font-size: 1.4em;
 }
@@ -54,13 +56,21 @@ body {
     font-family: 'Amatic SC', cursive;
 }
 
+hr {
+    width: 100%;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #000;
+    margin: 1em 0;
+    padding: 0;
+}
+
 .infoData {
-    color: white;
     text-align: center;
 }
 
 .infoAdres {
-    color: white;
     text-align: center;
 }
 
@@ -69,13 +79,11 @@ body {
     padding: 5px 20px 5px 20px;
     /* width: 40px; */
     background: transparent;
-    color: white;
     outline: none;
     border: 1px solid white;
 }
 
 .selectContainer {
-    color: white;
     margin: 20px 0 20px 0;
     width: inherit;
     padding: 0 20px 0 20px;
