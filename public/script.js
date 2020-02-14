@@ -1,12 +1,16 @@
 var weddingDate = new Date(2020, 9, 4, 16, 0, 0, 0);
 var timer = document.querySelector('.timer');
-
+var guestsNumber;
+var guestSelect = document.querySelector('#guests');
 timer.innerHTML = dhm(weddingDate - Date.now());
 
 setInterval(() => {
     timer.innerHTML = dhm(weddingDate - Date.now());
 }, 1000 * 60);
 
+document.querySelector('.nextButton').addEventListener('click', () => {
+    guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
+})
 
 function dhm(t) {
     var cd = 24 * 60 * 60 * 1000,

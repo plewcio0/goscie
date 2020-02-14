@@ -25,6 +25,7 @@ body {
 }
 
 .container {
+    color: white;
     width: 700px;
     display: flex;
     justify-content: center;
@@ -40,6 +41,29 @@ body {
     width: 200px;
     border-radius: 5px;
     padding: 5px;
+}
+
+.guestContainer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.guestsContainer {
+    width: 100%;
+}
+
+.guestContainer__fName {
+    padding: 5px;
+    border-radius: 5px;
+    width: 30%;
+}
+
+.guestContainer__lName {
+    padding: 5px;
+    border-radius: 5px;
+    width: 30%;
 }
 
 .guestSelect {
@@ -61,7 +85,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #000;
+    border-top: 1px solid #fff;
     margin: 1em 0;
     padding: 0;
 }
@@ -75,12 +99,14 @@ hr {
 }
 
 .nextButton {
+    font-family: 'Open Sans Condensed', sans-serif;
     border-radius: 5px;
     padding: 5px 20px 5px 20px;
     /* width: 40px; */
     background: transparent;
     outline: none;
     border: 1px solid white;
+    font-size: 1.1em;
 }
 
 .selectContainer {
@@ -112,23 +138,43 @@ hr {
     align-items: center;
 }
 
-@media only screen and (max-width: 479px) {
-    .container {
-        width: 90%;
-    }
-    .selectContainer {
-        flex-direction: column;
-        align-items: center;
-    }
+.wrapper2 {
+    max-width: 1200px;
+    width: 90%;
+    height: auto;
+    /* background: rgb(0, 212, 255);
+    background: linear-gradient(356deg, rgba(0, 212, 255, 0.07326680672268904) 0%, rgba(0, 212, 255, 1) 100%); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {
+@media only screen and (max-width: 767px) {
     .container {
         width: 90%;
     }
     .selectContainer {
-        align-items: center;
         flex-direction: column;
+        align-items: center;
+    }
+    .selectContainer__selectGuest {
+        width: 100%;
+    }
+    .guests {
+        width: 100%;
+        border-radius: 5px;
+        padding: 5px;
+    }
+    .guestContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .guestContainer__Name {
+        padding: 5px;
+        border-radius: 5px;
+        margin: 10px;
     }
 }
 
