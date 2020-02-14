@@ -29,3 +29,4 @@ function dhm(t) {
     }
     return `${d} dni ${pad(h)} godzin ${pad(m)} minut`
 }
+

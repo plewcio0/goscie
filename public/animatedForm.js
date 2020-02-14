@@ -1,15 +1,14 @@
-$('.nextButton').click(function() {
+$('.nextButton').click(function () {
     guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
     var innerHtml = "";
     for (let index = 0; index < guestsNumber; index++) {
-        if (index == guestsNumber-1)
-        {
+        if (index == guestsNumber - 1) {
             innerHtml += `<div class="guestContainer">
             <div class="nameContainer">
-            <input class="guestContainer__Name" type="text" placeholder="Imię">
+            <input class="guestContainer__Name" type="text" placeholder="Imię" id="imie${index}">
             </div>
             <div class="nameContainer">
-            <input class="guestContainer__Name" type="text" placeholder="Nazwisko">
+            <input class="guestContainer__Name" type="text" placeholder="Nazwisko" id="nazwisko${index}">
             </div>
             <div class="ask">
             <span>Czy potwierdzasz obecność?</span>
@@ -20,15 +19,14 @@ $('.nextButton').click(function() {
           </div>
         </div>`
         }
-        
-        else
-        {
+
+        else {
             innerHtml += `<div class="guestContainer">
             <div class="nameContainer">
-            <input class="guestContainer__Name" type="text" placeholder="Imię">
+            <input class="guestContainer__Name" type="text" placeholder="Imię" id="imie${index}">
             </div>
             <div class="nameContainer">
-            <input class="guestContainer__Name" type="text" placeholder="Nazwisko">
+            <input class="guestContainer__Name" type="text" placeholder="Nazwisko" id="nazwisko${index}">
             </div>
             <div class="ask">
             <span>Czy potwierdzasz obecność?</span>
@@ -40,7 +38,7 @@ $('.nextButton').click(function() {
         </div><hr class="guestLine">`
         }
     }
-    $('.container').fadeTo(600, 0, function() {
+    $('.container').fadeTo(600, 0, function () {
         $(this).delay(600);
         $(this).html(`        <div class="wrapper2">
         <div class="header" id="dashboard" role="alert">
@@ -53,6 +51,29 @@ $('.nextButton').click(function() {
         <hr>
         <div class="buttonContainer"><button class="nextButton2">Dalej</button></div>
     </div>`);
-        $(this).fadeTo(600, 1);
+        $(this).fadeTo(600, 1, function () {
+            $('.nextButton2').click(function () {
+                if (CheckIfEmpty()) {
+                    
+                }
+            })
+        });
+
     });
+
 });
+
+
+function CheckIfEmpty() {
+    $('.guestContainer').each(function (index) {
+        var im = $(this).children(":first").children();
+        var nz = $(this).children(":first").next().children();
+        if ($(this).children(":first").children().val() == "" || $(this).children(":first").next().children().val() == "") {
+            alert('Wpisz coś!');
+        }
+        else {
+            alert('Coś wpisałeś, później zobaczę czy dobrze ✔');
+        }
+    })
+
+}
