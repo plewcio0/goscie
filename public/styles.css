@@ -8,7 +8,11 @@ html {
     box-sizing: inherit;
     font-family: 'Open Sans Condensed', sans-serif;
 }
-
+.ask {
+    flex: 100%;
+    order: 3;
+    padding-top: 5px;
+}
 body {
     background: url(pc.jpg);
     background-repeat: no-repeat;
@@ -42,25 +46,43 @@ body {
     border-radius: 5px;
     padding: 5px;
 }
-
+.guestChoice {
+    border-radius: 5px;
+}
 .guestContainer {
+    margin: 10px 0 10px 0;
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-around;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .guestsContainer {
+    display: flex;
+    flex-direction: column;
+    /* height: 30vw; */
+    justify-content: space-between;
     width: 100%;
 }
 
 .guestContainer__Name {
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
-    width: 40%;
+    width: 100%;
+    font-size: 1rem;
+    letter-spacing: 2px;
 }
-
+.guestLine {
+    width: 100%;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid rgb(207, 189, 189);
+    margin: 1em 0;
+    padding: 0;
+}
 .guestSelect {
     color: black;
 }
@@ -92,7 +114,16 @@ hr {
 .infoAdres {
     text-align: center;
 }
-
+.nameContainer {
+    flex: 1 1 0;
+    width: 100%;
+}
+.nameContainer:nth-child(1) {
+    padding-right: 10px;
+}
+.nameContainer:nth-child(2) {
+    padding-left: 10px;
+}
 .nextButton {
     font-family: 'Open Sans Condensed', sans-serif;
     border-radius: 5px;
@@ -160,6 +191,7 @@ hr {
 @media only screen and (max-width: 767px) {
     .container {
         width: 90%;
+        margin: 20px 0 60px 0;
     }
     .selectContainer {
         flex-direction: column;
@@ -183,10 +215,19 @@ hr {
         width: 100%;
     }
     .guestContainer__Name {
-        padding: 5px;
         border-radius: 5px;
-        margin: 10px;
         width: 100%;
+    }
+    .nameContainer {
+        margin: 10px 0 10px 0;
+    }
+    .nameContainer:nth-child(1) {
+        width: 100%;
+        padding: 0;
+    }
+    .nameContainer:nth-child(2) {
+        width: 100%;
+        padding: 0;
     }
 }
 
