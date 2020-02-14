@@ -1,54 +1,27 @@
-$(document ).ready(function() {
-    //get all the data on app startup
-    $('#createEmployee').click(function(){
-        $('.employeeForm').css("display", "block");
-        $('#dynamicBtn').text('Save Changes')
-    });
+var weddingDate = new Date(2020, 9, 4, 16, 0, 0, 0);
+var timer = document.querySelector('.timer');
 
-    $('#dynamicBtn').click(function(){
-        //employee form values
-        var fname = $("#fname").val();
-        var lname = $("#lname").val();
-        var email = $("#email").val();
-        var age = $("#age").val();
-        var gender = $("#gender").val();
-        var yearsOfExperience = $("#yearsOfExperience").val();
-        var isfulltime = $('#isFullTime').is(":checked")
+timer.innerHTML = dhm(weddingDate - Date.now());
 
-        //check if you need to create or update an employee
-        if($(this).text() == "Save Changes"){
-        }
-        else{
-        }
-    });
+setInterval(() => {
+    timer.innerHTML = dhm(weddingDate - Date.now());
+}, 1000 * 60);
 
-    // Cancel the Employee form
-    $('#cancel').click(function(){
-        $('.employeeForm').css("display", "none");
-    });
 
-    // Get the data of the employee you want to edit
-    $("tbody.tbodyData").on("click","td.editEmployee", function(){
-        $('.employeeForm').css("display", "block");
-        $('#dynamicBtn').text('Update Employee');
-
-        $("#fname").val($(this).closest('tr').find('.fname').text());
-        $("#lname").val($(this).closest('tr').find('.lname').text());
-        $("#email").val($(this).closest('tr').find('.email').text());
-        $("#age").val($(this).closest('tr').find('.age').text());
-        $("#gender").val($(this).closest('tr').find('.gender').text());
-        $("#yearsOfExperience").val($(this).closest('tr').find('.yearsofexperience').text());
-        $("#isFullTime").prop('checked', $(this).closest('tr').find('.isfulltime').text() === 'true');
-    });
-
-    // Delete employee
-    $("tbody.tbodyData").on("click","td.deleteEmployee", function(){
-        //Get the Employee Data
-        var fName = $(this).closest('tr').find('.fname').text(); //First Name
-        var lName = $(this).closest('tr').find('.lname').text(); //Last Name
-    });
-
-    $("#searchEmployee" ).change(function() {
-        console.log('You entered: ', $(this).val());
-      });
-});
+function dhm(t) {
+    var cd = 24 * 60 * 60 * 1000,
+        ch = 60 * 60 * 1000,
+        d = Math.floor(t / cd),
+        h = Math.floor((t - d * cd) / ch),
+        m = Math.round((t - d * cd - h * ch) / 60000),
+        pad = function(n) { return n < 10 ? '0' + n : n; };
+    if (m === 60) {
+        h++;
+        m = 0;
+    }
+    if (h === 24) {
+        d++;
+        h = 0;
+    }
+    return `${d} dni ${pad(h)} godzin ${pad(m)} minut`
+}

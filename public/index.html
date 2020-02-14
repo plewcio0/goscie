@@ -8,9 +8,9 @@
     <meta name="description" content="Description" />
 
     <!-- Title -->
-    <meta property="og:title" content="Zapraszamy" />
+    <meta property="og:title" content="Milena i Daniel" />
     <!-- OPTIONAL description. 2-4 sentences. -->
-    <meta property="og:description" content="Witam na stornie do wesel" />
+    <meta property="og:description" content="Uprzejmie prosimy o potwierdzenie przybycia na nasze wesele ❤" />
     <!-- full url with http(s) ie. https://maciejkorsan.github.io/my-repo/ -->
     <meta property="og:url" content="https://goscieweselni-2020.web.app" />
     <!-- full url to the image with http(s) ie. https://maciejkorsan.github.io/my-repo/assets/img/fb.png. Facebook suggests at least 1200 x 630. -->
@@ -19,18 +19,14 @@
 
 
     <title>Witaj</title>
-    <!-- bootstrap related files -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
 
     <!-- jquery import -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <!-- font awesome for the icons -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- google font -->
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700|Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Open+Sans+Condensed:700&display=swap" rel="stylesheet">
     <!-- custom styles -->
     <link rel="stylesheet" href="styles.css">
 
@@ -38,10 +34,6 @@
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase.js"></script>
     <!-- <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script> -->
     <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-firestore.js"></script>
-
-    <!-- SignIn user Interface sdk -->
-    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
     <!-- Initialize firebase  -->
     <script>
@@ -63,24 +55,42 @@
     <!-- filtering scripts -->
     <script src="filter.js"></script>
     <!-- custom script -->
-    <script src="script.js"></script>
+
 
 </head>
 
 <body>
 
     <div class="container">
-        <div class="header" id="dashboard" role="alert">
-            <h1> Potwierdź swoją obecność na naszym weselu! </h1>
+        <div class="wrapper">
+            <div class="header" id="dashboard" role="alert">
+                <h1 class="headerHead"> Milena ❤ Daniel</h1>
+            </div>
+            <div class="info">
+                <div class="infoData">Piątek, 4 września 2020</div>
+                <div class="infoAdres">Ośrodek wypoczynkowy "Wiktorowo"<br>Wiktorowo 22, 88-410</div>
+            </div>
+            <div class="selectContainer">
+
+                <div class="selectContainer__guestsNumber">Ile osób potwierdzasz?</div>
+                <div class="selectContainer__selectGuest">
+                    <select id="guests" class="guests">
+                        <option class="guestSelect" value="1">1</option>
+                        <option class="guestSelect" value="2">2</option>
+                        <option class="guestSelect" value="3">3</option>
+                        <option class="guestSelect" value="4">4</option>
+                        <option class="guestSelect" value="5">5</option>
+                      </select>
+                </div>
+            </div>
+            <hr style="width: 100%;">
+            <div class="buttonContainer"><button class="nextButton">Dalej</button></div>
+            <div class="footer">Odliczamy: <span class="timer"></span></div>
         </div>
-        <div id="recaptcha-container"></div>
-        <div class="dane">Podaj kod:
-            <input id="ddd" type="text">
-        </div><button id="clickMe">potwierdz</button>
-        <div id=" firebaseui-auth-container "></div>
     </div>
     <!-- initialize script -->
     <script src="initialize.js "></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
