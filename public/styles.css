@@ -34,6 +34,7 @@ body {
 
 .footer {
     color: white;
+    margin-top: 40px;
 }
 
 .guests {
@@ -92,7 +93,6 @@ body {
 }
 
 .wrapper {
-    margin: 40px 0 40px 0;
     max-width: 1200px;
     width: 90%;
     height: auto;
