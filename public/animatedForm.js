@@ -1,5 +1,4 @@
 $('.nextButton').click(function () {
-
     guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
     var innerHtml = "";
     for (let index = 0; index < guestsNumber; index++) {
@@ -80,8 +79,8 @@ function CheckIfEmpty() {
         if (nz.val() == "") { //nazwisko
             nz.addClass('wrong');
         }
-        else {
-            var choice = $(this).children('.ask').children('#guestChoice').val();   // sprawdzenie czy wybral tak
+        else { // jesli oba pola na imie i nazwisko nie są puste \/
+            var choice = $(this).children('.ask').children('#guestChoice').val();   // sprawdzenie czy wybral tak czy nie
             AddConfirmedGuest(im.val(), nz.val(), choice);
         }
     })
@@ -90,7 +89,7 @@ function CheckIfEmpty() {
 
 
 function AddConfirmedGuest(im, nz, czy) {
-    zaproszeniRef.where("Imie", "==", im.capitalize()).where("Nazwisko", "==", nz.capitalize())
+    invitedRef.where("Imie", "==", im.capitalize()).where("Nazwisko", "==", nz.capitalize())
         .get()
         .then(function (querySnapshot) {
             if (querySnapshot.empty) {
@@ -99,7 +98,7 @@ function AddConfirmedGuest(im, nz, czy) {
                 querySnapshot.forEach(function (doc) {
                     // doc.data() is never undefined for query doc snapshots
                     console. log(doc.id, " => ", doc.data());
-                    zaproszeniRef.doc(doc.id).update({
+                    invitedRef.doc(doc.id).update({
                         czyPrzyjdzie: czy
                     })
                 });
