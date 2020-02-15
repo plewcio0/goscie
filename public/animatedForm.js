@@ -1,4 +1,5 @@
 $('.nextButton').click(function () {
+
     guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
     var innerHtml = "";
     for (let index = 0; index < guestsNumber; index++) {
@@ -52,10 +53,15 @@ $('.nextButton').click(function () {
         <div class="buttonContainer"><button class="nextButton2">Dalej</button></div>
     </div>`);
         $(this).fadeTo(600, 1, function () {
-            $('.nextButton2').click(function () {
-                if (CheckIfEmpty()) {
-                    
+            //
+            $('.guestContainer__Name').on('input', (e) => {
+                if (e.target.classList.contains('wrong')) {
+                    e.target.classList.remove('wrong');
                 }
+            })
+            $('.nextButton2').click(function () {
+                // po kliknieciu w przycisk
+                CheckIfEmpty();
             })
         });
 
@@ -68,12 +74,44 @@ function CheckIfEmpty() {
     $('.guestContainer').each(function (index) {
         var im = $(this).children(":first").children();
         var nz = $(this).children(":first").next().children();
-        if ($(this).children(":first").children().val() == "" || $(this).children(":first").next().children().val() == "") {
-            alert('Wpisz coś!');
+        if (im.val() == "") { //imie
+            im.addClass('wrong');
+        }
+        if (nz.val() == "") { //nazwisko
+            nz.addClass('wrong');
         }
         else {
-            alert('Coś wpisałeś, później zobaczę czy dobrze ✔');
+            var choice = $(this).children('.ask').children('#guestChoice').val();   // sprawdzenie czy wybral tak
+            AddConfirmedGuest(im.val(), nz.val(), choice);
         }
     })
 
+}
+
+
+function AddConfirmedGuest(im, nz, czy) {
+    zaproszeniRef.where("Imie", "==", im.capitalize()).where("Nazwisko", "==", nz.capitalize())
+        .get()
+        .then(function (querySnapshot) {
+            if (querySnapshot.empty) {
+                console.log("nie ma cie w bazie")
+            } else {
+                querySnapshot.forEach(function (doc) {
+                    // doc.data() is never undefined for query doc snapshots
+                    console. log(doc.id, " => ", doc.data());
+                    zaproszeniRef.doc(doc.id).update({
+                        czyPrzyjdzie: czy
+                    })
+                });
+            }
+
+        })
+        .catch(function (error) {
+            console.log("Error getting documents: ", error);
+        });
+}
+
+
+String.prototype.capitalize = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
 }
