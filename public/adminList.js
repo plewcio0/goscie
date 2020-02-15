@@ -14,11 +14,34 @@ invitedRef
     });
 
 function CreateList(guest) {
-    if (guest["czyPrzyjdzie"] == "Tak") {
-        list.push(`<div class="przyjdzie">${guest["Imie"]} ${guest["Nazwisko"]}</div>`)
-    } else if (guest["czyPrzyjdzie"] == "Nie") {
-        list.push(`<div class="niePrzyjdzie">${guest["Imie"]} ${guest["Nazwisko"]}</div>`)
-    } else {
-        list.push(`<div class="nieWiadomo">${guest["Imie"]} ${guest["Nazwisko"]}</div>`)
-    }
+        list.push(`<div>${guest["Imie"]} ${guest["Nazwisko"]}</div>`)
+}
+
+
+db.collection("Invited")
+    .onSnapshot(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+            if (doc.data().czyPrzyjdzie == "Tak") {
+                UpdateList("Tak",doc.data());
+            } else if (doc.data().czyPrzyjdzie == "Nie") {
+                UpdateList("Nie",doc.data());
+            }
+        });
+    });
+
+
+function UpdateList(czy, kto) {
+    var x = `${kto.Imie} ${kto.Nazwisko}`;
+    $('.container').find('*').each((ind, elem) => {
+        if (elem.innerText == x)
+        {
+            if (czy == "Tak")
+            {
+                elem.classList.add('przyjdzie');
+            } else if (czy == "Nie")
+            {
+                elem.classList.add('niePrzyjdzie');
+            }
+        }
+    })
 }
