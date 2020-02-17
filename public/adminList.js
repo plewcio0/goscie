@@ -37,9 +37,11 @@ function UpdateList(czy, kto) {
         {
             if (czy == "Tak")
             {
+                elem.className = '';
                 elem.classList.add('przyjdzie');
             } else if (czy == "Nie")
             {
+                elem.className = '';
                 elem.classList.add('niePrzyjdzie');
             }
         }
