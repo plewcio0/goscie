@@ -67,7 +67,8 @@ $('.nextButton').click(function() {
                     //  dorobic
                     $('.operationStatus').html('');
                     $('.operationStatus').css("display", "block");
-                    ConfirmGuests(guestsContainer);
+                    //TODO - dwie funkcje zapelniające listy gośćmi, jedna z UI, druga z bazy z zapytań where
+                    //ConfirmGuests(guestsContainer);
                 }
             })
         });
