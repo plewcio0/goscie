@@ -102,6 +102,8 @@ function ConfirmGuests(guestsContainer) {
                 if (querySnapshot.empty) {
                     console.log("Nie ma Cię w naszej bazie!");
                     $('.operationStatus').html('<div class="zleDane">Wprowadzono niepoprawne dane.</div>').delay(2500).fadeOut('slow');
+                    $(element).children(":first").children().addClass('wrong');
+                    $(element).children(":first").next().children().addClass('wrong');
                 } else {
                     querySnapshot.forEach(function(doc) {
                         invitedRef.doc(doc.id).update({
