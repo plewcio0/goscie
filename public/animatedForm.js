@@ -58,7 +58,6 @@ $('.nextButton').click(function() {
             })
             $('.nextButton2').click(function() {
                 // po kliknieciu w przycisk
-                var sss = $(this).parent();
                 var guestsContainer = $(this).parent().prevAll(".guestsContainer")
                 if (CheckIfEmpty(guestsContainer)) {
                     console.log("pustka gdziess")
@@ -66,6 +65,7 @@ $('.nextButton').click(function() {
                     // if (guestcontainers.contains(ListaOsobZOsobami)) -- jak jest ktos z nieznanych
                     // else if  -- jak wszyscy znani
                     //  dorobic
+                    dodajwpis(guestsContainer);
                 }
             })
         });
@@ -87,6 +87,37 @@ function CheckIfEmpty(guestsContainer) {
     return empty;
 }
 
+function dodajwpis(guestsContainer) {
+    $(guestsContainer).children('.guestContainer').each(function(index, element) {
+        var imie = $(element).children(":first").children().val();
+        var nazwisko = $(element).children(":first").next().children().val();
+        var choice = $(element).children(".ask").children('#guestChoice').val();
+        invitedRef.where("Imie", "==", imie.capitalize()).where("Nazwisko", "==", nazwisko.capitalize())
+            .get()
+            .then(function(querySnapshot) {
+                if (querySnapshot.empty) {
+                    console.log("Nie ma Cię w naszej bazie!");
+                } else {
+                    querySnapshot.forEach(function(doc) {
+                        var document = doc.data();
+                        console.log(doc.id);
+                        console.log(document.Imie);
+                        console.log(document.Nazwisko);
+                        invitedRef.doc(doc.id).update({
+                            czyPrzyjdzie: choice
+                        }).then(() => {
+                            console.log("Potwierdziłeś swoje przybycie")
+                        }).catch((err) => {
+                            console.log("Nie udało się potwierdzić")
+                        })
+                    });
+                }
+            })
+            .catch(function(err) {
+                console.log("error")
+            })
+    })
+}
 // function CheckIfEmpty() {
 //     $('.guestContainer').each(function(index) {
 //         var im = $(this).children(":first").children();
