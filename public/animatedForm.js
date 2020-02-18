@@ -47,7 +47,7 @@ $('.nextButton').click(function() {
             ${innerHtml}
         </div>
         <hr>
-        <div class="buttonContainer"><button class="nextButton2">Dalej</button></div>
+        <div class="buttonContainer"><div class="operationStatus"></div><button class="nextButton2">Dalej</button></div>
     </div>`);
         $(this).fadeTo(600, 1, function() {
             //
@@ -65,7 +65,9 @@ $('.nextButton').click(function() {
                     // if (guestcontainers.contains(ListaOsobZOsobami)) -- jak jest ktos z nieznanych
                     // else if  -- jak wszyscy znani
                     //  dorobic
-                    dodajwpis(guestsContainer);
+                    $('.operationStatus').html('');
+                    $('.operationStatus').css("display", "block");
+                    ConfirmGuests(guestsContainer);
                 }
             })
         });
@@ -73,6 +75,7 @@ $('.nextButton').click(function() {
     });
 
 });
+
 
 function CheckIfEmpty(guestsContainer) {
     var empty = false;
@@ -87,7 +90,7 @@ function CheckIfEmpty(guestsContainer) {
     return empty;
 }
 
-function dodajwpis(guestsContainer) {
+function ConfirmGuests(guestsContainer) {
     $(guestsContainer).children('.guestContainer').each(function(index, element) {
         var imie = $(element).children(":first").children().val();
         var nazwisko = $(element).children(":first").next().children().val();
@@ -97,12 +100,9 @@ function dodajwpis(guestsContainer) {
             .then(function(querySnapshot) {
                 if (querySnapshot.empty) {
                     console.log("Nie ma Cię w naszej bazie!");
+                    $('.operationStatus').html('<div class="zleDane">Wprowadzono niepoprawne dane.</div>').delay(2500).fadeOut('slow');
                 } else {
                     querySnapshot.forEach(function(doc) {
-                        var document = doc.data();
-                        console.log(doc.id);
-                        console.log(document.Imie);
-                        console.log(document.Nazwisko);
                         invitedRef.doc(doc.id).update({
                             czyPrzyjdzie: choice
                         }).then(() => {
@@ -115,6 +115,7 @@ function dodajwpis(guestsContainer) {
             })
             .catch(function(err) {
                 console.log("error")
+                console.log(err)
             })
     })
 }

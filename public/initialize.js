@@ -1,3 +1,3 @@
 var db = firebase.firestore();
-var zaproszeniRef = db.collection("Zaproszeni");
+var zaproszeniRef = db.collection("zOsobamiTowarzyszacymi");
 var invitedRef = db.collection("Invited");
