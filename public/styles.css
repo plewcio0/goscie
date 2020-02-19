@@ -157,6 +157,7 @@ hr {
 
 .mapa {
     width: 100%;
+    height: 100%;
 }
 
 .nameContainer {
@@ -234,6 +235,15 @@ hr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+    font-family: 'Amatic SC', cursive;
+    font-weight: bold;
+    font-size: 1.5em;
+    letter-spacing: 3px;
+    color: white;
+    padding: 10px;
+    background: rgb(196, 196, 196);
+    margin: 5px;
 }
 
 .wrapper {

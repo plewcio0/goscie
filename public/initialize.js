@@ -23,9 +23,9 @@ if (localStorage.getItem("goscie") === null) {
     var innerHTML = '';
     guestsArray.forEach(guest => {
         if (guest[1] == "Tak") {
-            innerHTML += `<div style="color:darkgreen;" class="summaryListContainer__guest"><span class="guest__Data">${guest[0]}</span><i class="fas fa-check fa-fw"></i></div>`
+            innerHTML += `<div class="summaryListContainer__guest"><span class="guest__Data">${guest[0]}</span><i class="fas fa-check fa-fw"></i></div>`
         } else if (guest[1] == "Nie") {
-            innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${guest[0]}</span><i class="fas fa-times fa-fw"></i></div>`
+            innerHTML += `<div class="summaryListContainer__guest"><span class="guest__Data">${guest[0]}</span><i class="fas fa-times fa-fw"></i></div>`
         }
     });
     var html = `<div class="wrapper3">
