@@ -1,3 +1,4 @@
+var object = [];
 var listaGosciZOsobami = [];
 var counter;
 invitedRef.where("zOsoba", "==", true)
@@ -98,12 +99,14 @@ function ShowSummaryContainer(guestsContainer) {
         var imie = $(element).children(":first").children().val().trim().capitalize();
         var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
         var choice = $(element).children(".ask").children('#guestChoice').val();
+        object.push([`${imie} ${nazwisko}`, choice]);
         if (choice == "Tak") {
             innerHTML += `<div style="color:darkgreen;" class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-check fa-fw"></i></div>`
         } else if (choice == "Nie") {
             innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-times fa-fw"></i></div>`
         }
     })
+    localStorage.setItem()
     $('.container').fadeTo(600, 0, function() {
         $(this).delay(600);
         $(this).html(`        <div class="wrapper3">

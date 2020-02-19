@@ -32,7 +32,6 @@ if (true) {
     <div class="confirmedGuestContainer">
     </div>
     </div>
-
 </div>`
     $(html).insertBefore(".footer");
 }
