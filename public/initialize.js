@@ -2,7 +2,7 @@ var db = firebase.firestore();
 var zaproszeniRef = db.collection("zOsobamiTowarzyszacymi");
 var invitedRef = db.collection("Invited");
 
-if (true) {
+if (localStorage.getItem("goscie") === null) {
     var html = `<div class="selectContainer">
     <div class="selectContainer__guestsNumber">Ile osób potwierdzasz?</div>
     <div class="selectContainer__selectGuest">
@@ -19,6 +19,15 @@ if (true) {
 <div class="buttonContainer"><button class="nextButton">Dalej</button></div>`
     $(html).insertBefore(".footer");
 } else {
+    var guestsArray = JSON.parse(localStorage.getItem("goscie"));
+    var innerHTML = '';
+    guestsArray.forEach(guest => {
+        if (guest[1] == "Tak") {
+            innerHTML += `<div style="color:darkgreen;" class="summaryListContainer__guest"><span class="guest__Data">${guest[0]}</span><i class="fas fa-check fa-fw"></i></div>`
+        } else if (guest[1] == "Nie") {
+            innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${guest[0]}</span><i class="fas fa-times fa-fw"></i></div>`
+        }
+    });
     var html = `<div class="wrapper3">
     <div class="header" id="dashboard" role="alert">
         <h1 class="headerHead">Dziękujemy za potwierdzenie!</h1>
@@ -30,6 +39,7 @@ if (true) {
     <div class="summaryListContainer">
     <span class="summaryListContainer__header">Potwiedzeni goście</span>
     <div class="confirmedGuestContainer">
+    ${innerHTML}
     </div>
     </div>
 </div>`

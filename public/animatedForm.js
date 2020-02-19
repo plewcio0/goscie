@@ -79,7 +79,7 @@ $('.nextButton').click(function() {
                     $('.operationStatus').css("display", "block");
                     var invitedGuest = CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami);
                     if (invitedGuest.length == 1) {
-                        ConfirmGuestWIthSomeone(guestsContainer, invitedGuest)
+                        ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) // TODO dodac weryfikacje czy guestsContainer zawiera juz wprowadzone do bazy rekordy
                     } else {
                         ConfirmGuests(guestsContainer)
                     }
@@ -106,7 +106,7 @@ function ShowSummaryContainer(guestsContainer) {
             innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-times fa-fw"></i></div>`
         }
     })
-    localStorage.setItem()
+    localStorage.setItem("goscie", JSON.stringify(object));
     $('.container').fadeTo(600, 0, function() {
         $(this).delay(600);
         $(this).html(`        <div class="wrapper3">
@@ -127,6 +127,7 @@ function ShowSummaryContainer(guestsContainer) {
     </div>`);
         $(this).fadeTo(600, 1);
     });
+    console.log(object);
 }
 
 

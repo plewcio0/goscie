@@ -9,9 +9,11 @@ setInterval(() => {
 }, 1000 * 60);
 
 $(document).ready(function() {
-    document.querySelector('.nextButton').addEventListener('click', () => {
-        guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
-    })
+    if (document.querySelector('.nextButton') != null) {
+        document.querySelector('.nextButton').addEventListener('click', () => {
+            guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
+        })
+    }
 })
 
 
