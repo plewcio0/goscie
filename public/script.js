@@ -8,9 +8,11 @@ setInterval(() => {
     timer.innerHTML = dhm(weddingDate - Date.now());
 }, 1000 * 60);
 
-document.querySelector('.nextButton').addEventListener('click', () => {
-    guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
-})
+if ($('.nextButton').length) {
+    document.querySelector('.nextButton').addEventListener('click', () => {
+        guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
+    })
+}
 
 function dhm(t) {
     var cd = 24 * 60 * 60 * 1000,
@@ -29,4 +31,3 @@ function dhm(t) {
     }
     return `${d} dni ${pad(h)} godzin ${pad(m)} minut`
 }
-

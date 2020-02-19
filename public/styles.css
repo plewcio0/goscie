@@ -319,6 +319,7 @@ hr {
     .wrapper3 {
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
     .wrapper3>.header {
         order: 1;

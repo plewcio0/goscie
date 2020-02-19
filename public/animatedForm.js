@@ -99,9 +99,9 @@ function ShowSummaryContainer(guestsContainer) {
         var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
         var choice = $(element).children(".ask").children('#guestChoice').val();
         if (choice == "Tak") {
-            innerHTML += `<div style="color:darkgreen;" class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-check"></i></div>`
+            innerHTML += `<div style="color:darkgreen;" class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-check fa-fw"></i></div>`
         } else if (choice == "Nie") {
-            innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-times"></i></div>`
+            innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-times fa-fw"></i></div>`
         }
     })
     $('.container').fadeTo(600, 0, function() {
