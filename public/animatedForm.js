@@ -1,3 +1,12 @@
+var listaGosciZOsobami = [];
+invitedRef.where("zOsoba", "==", true)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(document => {
+            listaGosciZOsobami.push(`${document.data().Imie} ${document.data().Nazwisko}`)
+        });
+
+    })
 $('.nextButton').click(function() {
     guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
     var innerHtml = "";
@@ -57,18 +66,21 @@ $('.nextButton').click(function() {
                 }
             })
             $('.nextButton2').click(function() {
+                $('.guestContainer__Name').removeClass('wrong');
                 // po kliknieciu w przycisk
-                var guestsContainer = $(this).parent().prevAll(".guestsContainer")
+                var guestsContainer = $(this).parent().prevAll(".guestsContainer");
                 if (CheckIfEmpty(guestsContainer)) {
                     console.log("pustka gdziess")
                 } else {
-                    // if (guestcontainers.contains(ListaOsobZOsobami)) -- jak jest ktos z nieznanych
-                    // else if  -- jak wszyscy znani
-                    //  dorobic
                     $('.operationStatus').html('');
                     $('.operationStatus').css("display", "block");
-                    //TODO - dwie funkcje zapelniające listy gośćmi, jedna z UI, druga z bazy z zapytań where
-                    ConfirmGuests(guestsContainer);
+                    var invitedGuest = CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami);
+                    if (invitedGuest.length == 1) {
+                        ConfirmGuestWIthSomeone(guestsContainer, invitedGuest)
+                    } else {
+                        ConfirmGuests(guestsContainer);
+                    }
+
                 }
             })
         });
@@ -76,6 +88,57 @@ $('.nextButton').click(function() {
     });
 
 });
+
+function CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami) {
+    var lista = [];
+    $(guestsContainer).children('.guestContainer').each(function(index, element) {
+        var imie = $(element).children(":first").children().val().trim().capitalize();
+        var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
+        lista.push(`${imie} ${nazwisko}`)
+    })
+    return lista.filter(value => -1 !== listaGosciZOsobami.indexOf(value))
+}
+
+
+function ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) {
+    $(guestsContainer).children('.guestContainer').each(function(index, element) {
+        var imie = $(element).children(":first").children().val().trim().capitalize();
+        var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
+        var choice = $(element).children(".ask").children('#guestChoice').val();
+        if (`${imie} ${nazwisko}` == invitedGuest[0]) {
+            invitedRef.where("Imie", "==", imie).where("Nazwisko", "==", nazwisko)
+                .get()
+                .then(function(querySnapshot) {
+                    querySnapshot.forEach(function(doc) {
+                        invitedRef.doc(doc.id).update({
+                            czyPrzyjdzie: choice
+                        }).then(() => {
+                            console.log("Potwierdziłeś swoje przybycie z osobą towarzyszącą")
+                        }).catch((err) => {
+                            console.log("Nie udało się potwierdzić przybycia z osobą towarzyszącą")
+                        })
+                    })
+                })
+                .catch(function(err) {
+                    console.log(err)
+                })
+        } else {
+            invitedRef.doc().set({
+                    Imie: imie,
+                    Nazwisko: nazwisko,
+                    czyPrzyjdzie: choice,
+                    zKim: invitedGuest[0]
+                })
+                .then(() => {
+                    console.log("Potwierdzono przybycie osoby towarzyszącej")
+                })
+                .catch((err) => {
+                    console.log("Nie udalo sie potwierdzić przybycia osoby towarzyszacej")
+                    console.log(err);
+                })
+        }
+    })
+}
 
 
 function CheckIfEmpty(guestsContainer) {
@@ -93,8 +156,8 @@ function CheckIfEmpty(guestsContainer) {
 
 function ConfirmGuests(guestsContainer) {
     $(guestsContainer).children('.guestContainer').each(function(index, element) {
-        var imie = $(element).children(":first").children().val();
-        var nazwisko = $(element).children(":first").next().children().val();
+        var imie = $(element).children(":first").children().val().trim();
+        var nazwisko = $(element).children(":first").next().children().val().trim();
         var choice = $(element).children(".ask").children('#guestChoice').val();
         invitedRef.where("Imie", "==", imie.capitalize()).where("Nazwisko", "==", nazwisko.capitalize())
             .get()
@@ -117,51 +180,10 @@ function ConfirmGuests(guestsContainer) {
                 }
             })
             .catch(function(err) {
-                console.log("error")
                 console.log(err)
             })
     })
 }
-// function CheckIfEmpty() {
-//     $('.guestContainer').each(function(index) {
-//         var im = $(this).children(":first").children();
-//         var nz = $(this).children(":first").next().children();
-//         if (im.val() == "") { //imie
-//             im.addClass('wrong');
-//         }
-//         if (nz.val() == "") { //nazwisko
-//             nz.addClass('wrong');
-//         } else { // jesli oba pola na imie i nazwisko nie są puste \/
-//             var choice = $(this).children('.ask').children('#guestChoice').val(); // sprawdzenie czy wybral tak czy nie
-//             AddConfirmedGuest(im.val(), nz.val(), choice);
-//         }
-//     })
-
-// }
-
-
-function AddConfirmedGuest(im, nz, czy) {
-    invitedRef.where("Imie", "==", im.capitalize()).where("Nazwisko", "==", nz.capitalize())
-        .get()
-        .then(function(querySnapshot) {
-            if (querySnapshot.empty) {
-                console.log("nie ma cie w bazie")
-            } else {
-                querySnapshot.forEach(function(doc) {
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.id, " => ", doc.data());
-                    invitedRef.doc(doc.id).update({
-                        czyPrzyjdzie: czy
-                    })
-                });
-            }
-
-        })
-        .catch(function(error) {
-            console.log("Error getting documents: ", error);
-        });
-}
-
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
