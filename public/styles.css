@@ -6,7 +6,6 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
-    font-family: 'Open Sans Condensed', sans-serif;
 }
 
 .ask {
@@ -38,7 +37,16 @@ body {
     align-self: flex-start;
 }
 
+.confirmedGuestContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
 .container {
+    font-family: 'Open Sans Condensed', sans-serif;
     color: white;
     width: 700px;
     display: flex;
@@ -58,7 +66,7 @@ body {
 }
 
 .footer {
-    margin-top: 40px;
+    margin: 10px 0 10px 0;
 }
 
 .guests {
@@ -139,6 +147,18 @@ hr {
     text-align: center;
 }
 
+.mapContainer {
+    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+}
+
+.mapa {
+    width: 100%;
+}
+
 .nameContainer {
     flex: 1 1 0;
     width: 100%;
@@ -199,12 +219,27 @@ hr {
     display: inline-block;
 }
 
+.summaryListContainer {
+    display: flex;
+    flex: 50%;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.summaryListContainer__header {}
+
+.summaryListContainer__guest {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .wrapper {
     max-width: 1200px;
     width: 90%;
     height: auto;
-    /* background: rgb(0, 212, 255);
-    background: linear-gradient(356deg, rgba(0, 212, 255, 0.07326680672268904) 0%, rgba(0, 212, 255, 1) 100%); */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -215,12 +250,19 @@ hr {
     max-width: 1200px;
     width: 90%;
     height: auto;
-    /* background: rgb(0, 212, 255);
-    background: linear-gradient(356deg, rgba(0, 212, 255, 0.07326680672268904) 0%, rgba(0, 212, 255, 1) 100%); */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+.wrapper3 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    max-width: 1200px;
 }
 
 .wrong {
@@ -273,6 +315,19 @@ hr {
     .nameContainer:nth-child(2) {
         width: 100%;
         padding: 0;
+    }
+    .wrapper3 {
+        display: flex;
+        flex-direction: column;
+    }
+    .wrapper3>.header {
+        order: 1;
+    }
+    .summaryListContainer {
+        order: 2;
+    }
+    .mapContainer {
+        order: 3;
     }
 }
 

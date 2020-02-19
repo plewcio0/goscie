@@ -1,4 +1,5 @@
 var listaGosciZOsobami = [];
+var counter;
 invitedRef.where("zOsoba", "==", true)
     .get()
     .then(function(querySnapshot) {
@@ -60,6 +61,7 @@ $('.nextButton').click(function() {
     </div>`);
         $(this).fadeTo(600, 1, function() {
             //
+
             $('.guestContainer__Name').on('input', (e) => {
                 if (e.target.classList.contains('wrong')) {
                     e.target.classList.remove('wrong');
@@ -78,16 +80,53 @@ $('.nextButton').click(function() {
                     if (invitedGuest.length == 1) {
                         ConfirmGuestWIthSomeone(guestsContainer, invitedGuest)
                     } else {
-                        ConfirmGuests(guestsContainer);
+                        ConfirmGuests(guestsContainer)
                     }
-
                 }
+
             })
         });
 
     });
 
 });
+
+
+function ShowSummaryContainer(guestsContainer) {
+    var innerHTML = '';
+    $(guestsContainer).children('.guestContainer').each(function(index, element) {
+        var imie = $(element).children(":first").children().val().trim().capitalize();
+        var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
+        var choice = $(element).children(".ask").children('#guestChoice').val();
+        if (choice == "Tak") {
+            innerHTML += `<div style="color:darkgreen;" class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-check"></i></div>`
+        } else if (choice == "Nie") {
+            innerHTML += `<div style="color:darkred;"  class="summaryListContainer__guest"><span class="guest__Data">${imie} ${nazwisko}</span><i class="fas fa-times"></i></div>`
+        }
+    })
+    $('.container').fadeTo(600, 0, function() {
+        $(this).delay(600);
+        $(this).html(`        <div class="wrapper3">
+        <div class="header" id="dashboard" role="alert">
+            <h1 class="headerHead">Dziękujemy za potwierdzenie!</h1>
+        </div>
+        <div class="mapContainer">
+        <span class="mapContainer__header">Mapa dojazdu</span>
+        <iframe class="mapa" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4822.188773503775!2d17.8609276!3d52.8206625!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470361e4d3c17a89%3A0x135059415e719ac1!2sO%C5%9Brodek%20Wypoczynkowy%20Wiktorowo!5e0!3m2!1spl!2spl!4v1582111557593!5m2!1spl!2spl" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+        </div>
+        <div class="summaryListContainer">
+        <span class="summaryListContainer__header">Potwiedzeni goście</span>
+        <div class="confirmedGuestContainer">
+        ${innerHTML}
+        </div>
+        </div>
+
+    </div>`);
+        $(this).fadeTo(600, 1);
+    });
+}
+
+
 
 function CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami) {
     var lista = [];
@@ -101,6 +140,7 @@ function CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami) {
 
 
 function ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) {
+    counter = 0;
     $(guestsContainer).children('.guestContainer').each(function(index, element) {
         var imie = $(element).children(":first").children().val().trim().capitalize();
         var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
@@ -113,9 +153,13 @@ function ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) {
                         invitedRef.doc(doc.id).update({
                             czyPrzyjdzie: choice
                         }).then(() => {
-                            console.log("Potwierdziłeś swoje przybycie z osobą towarzyszącą")
+                            console.log("Potwierdziłeś swoje przybycie z osobą towarzyszącą");
+                            counter++;
+                            if (counter == guestsNumber) {
+                                ShowSummaryContainer(guestsContainer);
+                            }
                         }).catch((err) => {
-                            console.log("Nie udało się potwierdzić przybycia z osobą towarzyszącą")
+                            console.log("Nie udało się potwierdzić przybycia z osobą towarzyszącą");
                         })
                     })
                 })
@@ -130,10 +174,14 @@ function ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) {
                     zKim: invitedGuest[0]
                 })
                 .then(() => {
-                    console.log("Potwierdzono przybycie osoby towarzyszącej")
+                    console.log("Potwierdzono przybycie osoby towarzyszącej");
+                    counter++;
+                    if (counter == guestsNumber) {
+                        ShowSummaryContainer(guestsContainer);
+                    }
                 })
                 .catch((err) => {
-                    console.log("Nie udalo sie potwierdzić przybycia osoby towarzyszacej")
+                    console.log("Nie udalo sie potwierdzić przybycia osoby towarzyszacej");
                     console.log(err);
                 })
         }
@@ -155,6 +203,7 @@ function CheckIfEmpty(guestsContainer) {
 }
 
 function ConfirmGuests(guestsContainer) {
+    counter = 0;
     $(guestsContainer).children('.guestContainer').each(function(index, element) {
         var imie = $(element).children(":first").children().val().trim();
         var nazwisko = $(element).children(":first").next().children().val().trim();
@@ -173,8 +222,13 @@ function ConfirmGuests(guestsContainer) {
                             czyPrzyjdzie: choice
                         }).then(() => {
                             console.log("Potwierdziłeś swoje przybycie")
+                            counter++;
+                            if (counter == guestsNumber) {
+                                ShowSummaryContainer(guestsContainer);
+                            }
                         }).catch((err) => {
                             console.log("Nie udało się potwierdzić")
+                            console.log(err)
                         })
                     });
                 }
