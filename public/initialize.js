@@ -2,7 +2,7 @@ var db = firebase.firestore();
 var zaproszeniRef = db.collection("zOsobamiTowarzyszacymi");
 var invitedRef = db.collection("Invited");
 
-if (localStorage.getItem("goscie") === null) {
+if ( /*localStorage.getItem("goscie") === null*/ true) {
     var html = `<div class="selectContainer">
     <div class="selectContainer__guestsNumber">Ile osób potwierdzasz?</div>
     <div class="selectContainer__selectGuest">
