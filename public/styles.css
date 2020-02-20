@@ -349,15 +349,16 @@ hr {
         flex-direction: column;
         width: 100%;
     }
-    .wrapper3>.header {
-        order: 1;
-    }
     .summaryListContainer {
         order: 2;
+        width: 100%;
     }
     .mapContainer {
         order: 3;
-        margin-top: 20px;
+        width: 100%;
+    }
+    .summary {
+        flex-direction: column;
     }
 }
 
