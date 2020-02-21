@@ -1,5 +1,6 @@
 var object = [];
 var listaGosciZOsobami = [];
+var confirmedGuests = [];
 var counter;
 invitedRef.where("zOsoba", "==", true)
     .get()
@@ -8,6 +9,20 @@ invitedRef.where("zOsoba", "==", true)
             listaGosciZOsobami.push(`${document.data().Imie} ${document.data().Nazwisko}`)
         });
 
+    })
+
+invitedRef.where("czyPrzyjdzie", "in", ["Tak", "Nie"])
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(confirmedGuest => {
+            confirmedGuests.push(`${confirmedGuest.data().Imie} ${confirmedGuest.data().Nazwisko}`);
+        });
+        console.log("Already confirmed:");
+        console.log(confirmedGuests);
+    })
+    .catch(function(err) {
+        console.log("Error while fetching data");
+        console.log(err);
     })
 $('.nextButton').click(function() {
     guestsNumber = guestSelect.options[guestSelect.selectedIndex].value;
@@ -77,12 +92,18 @@ $('.nextButton').click(function() {
                 } else {
                     $('.operationStatus').html('');
                     $('.operationStatus').css("display", "block");
-                    var invitedGuest = CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami);
-                    if (invitedGuest.length == 1) {
-                        ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) // TODO dodac weryfikacje czy guestsContainer zawiera juz wprowadzone do bazy rekordy
+                    var alreadyConfirmed = CheckIfConfirmed(guestsContainer, confirmedGuests);
+                    if (alreadyConfirmed) {
+                        $('.operationStatus').html('<div class="zleDane">Gość został już potwierdzony!</div>').delay(2500).fadeOut('slow');
                     } else {
-                        ConfirmGuests(guestsContainer)
+                        var invitedGuest = CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami);
+                        if (invitedGuest.length == 1) {
+                            ConfirmGuestWIthSomeone(guestsContainer, invitedGuest) // TODO dodac weryfikacje czy guestsContainer zawiera juz wprowadzone do bazy rekordy
+                        } else {
+                            ConfirmGuests(guestsContainer)
+                        }
                     }
+
                 }
 
             })
@@ -132,7 +153,20 @@ function ShowSummaryContainer(guestsContainer) {
     console.log(object);
 }
 
-
+function CheckIfConfirmed(guestsContainer, confirmedGuests) {
+    var lista = [];
+    $(guestsContainer).children('.guestContainer').each(function(index, element) {
+        var imie = $(element).children(":first").children().val().trim().capitalize();
+        var nazwisko = $(element).children(":first").next().children().val().trim().capitalize();
+        lista.push(`${imie} ${nazwisko}`)
+        if (confirmedGuests.includes(lista[index])) {
+            $(element).children('.nameContainer').each(function(index, element) {
+                $(element).children().addClass('wrong');
+            })
+        }
+    })
+    return lista.filter(value => -1 !== confirmedGuests.indexOf(value)).length > 0 ? true : false;
+}
 
 function CheckIfSomeoneIsOnTheList(guestsContainer, listaGosciZOsobami) {
     var lista = [];
