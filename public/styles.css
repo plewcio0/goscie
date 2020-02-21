@@ -303,7 +303,7 @@ hr {
 
 @media only screen and (max-width: 767px) {
     body {
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: rgba(255, 255, 255, 0.2);
         background-blend-mode: overlay;
         position: relative;
     }
@@ -352,7 +352,7 @@ hr {
         display: flex;
         flex-direction: column;
         width: 100%;
-        margin-bottom: 150px;
+        margin-bottom: 240px;
     }
     .summaryListContainer {
         order: 1;
@@ -365,7 +365,7 @@ hr {
         position: absolute;
         bottom: 0;
         padding: 0;
-        height: auto;
+        height: 30%;
     }
     .summary {
         flex-direction: column;
@@ -378,6 +378,7 @@ hr {
         letter-spacing: 2px;
         display: block;
         margin-top: 100px;
+        text-align: center;
     }
     .sentence>p {
         margin: 0;
