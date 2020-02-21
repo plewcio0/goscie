@@ -226,6 +226,10 @@ hr {
     display: inline-block;
 }
 
+.sentence {
+    display: none;
+}
+
 .summary {
     display: flex;
     flex-direction: row;
@@ -298,9 +302,15 @@ hr {
 }
 
 @media only screen and (max-width: 767px) {
+    body {
+        background-color: rgba(255, 255, 255, 0.5);
+        background-blend-mode: overlay;
+        position: relative;
+    }
     .container {
         width: 90%;
         margin: 20px 0 60px 0;
+        background: none;
     }
     .selectContainer {
         flex-direction: column;
@@ -342,17 +352,35 @@ hr {
         display: flex;
         flex-direction: column;
         width: 100%;
+        margin-bottom: 150px;
     }
     .summaryListContainer {
-        order: 2;
+        order: 1;
         width: 100%;
+        color: white;
     }
     .mapContainer {
-        order: 3;
         width: 100%;
+        color: white;
+        position: absolute;
+        bottom: 0;
+        padding: 0;
+        height: auto;
     }
     .summary {
         flex-direction: column;
+    }
+    .sentence {
+        order: 2;
+        font-family: 'Amatic SC', cursive;
+        font-weight: bold;
+        font-size: x-large;
+        letter-spacing: 2px;
+        display: block;
+        margin-top: 100px;
+    }
+    .sentence>p {
+        margin: 0;
     }
 }
 
