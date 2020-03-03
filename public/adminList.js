@@ -1,17 +1,7 @@
+// Initialize the FirebaseUI Widget using Firebase.
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
 var list = [];
-invitedRef
-    .get()
-    .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log(doc.id, " => ", doc.data());
-            CreateList(doc.data());
-        });
-        $('.container').append(list);
 
-    })
-    .catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
 
 function CreateList(guest) {
     if (guest.zKim == null) {
@@ -54,8 +44,14 @@ function UpdateList(czy, kto) {
     })
 }
 
-document.querySelector('.clearGuests--js').addEventListener('click', () => {
-    ClearList();
+
+
+document.querySelector('.Loguj').addEventListener('click', () => {
+    var login = $('.login__input').val();
+    var haslo = $('.haslo__input').val();
+    console.log(login)
+    console.log(haslo)
+    Zaloguj(login, haslo);
 })
 
 function ClearList() {
@@ -67,3 +63,45 @@ function ClearList() {
         });
     })
 }
+
+function Zaloguj(login, haslo) {
+    firebase.auth().signInWithEmailAndPassword(login, haslo).catch(function(err) {
+        console.log('error loggin')
+    })
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+        // User is signed in.
+        var displayName = user.displayName;
+        var email = user.email;
+        var emailVerified = user.emailVerified;
+        var photoURL = user.photoURL;
+        var isAnonymous = user.isAnonymous;
+        var uid = user.uid;
+        var providerData = user.providerData;
+        // ...
+        console.log('logged');
+        $('.container').empty();
+        invitedRef
+            .get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    console.log(doc.id, " => ", doc.data());
+                    CreateList(doc.data());
+                });
+                $('.container').append(list);
+                $('.container').append(`<button class="clearGuests--js">Wyczyść liste</button>`);
+                document.querySelector('.clearGuests--js').addEventListener('click', () => {
+                    ClearList();
+                })
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+    } else {
+        console.log('not logged');
+        // User is signed out.
+        // ...
+    }
+});
