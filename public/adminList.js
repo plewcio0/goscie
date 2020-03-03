@@ -53,3 +53,17 @@ function UpdateList(czy, kto) {
         }
     })
 }
+
+document.querySelector('.clearGuests--js').addEventListener('click', () => {
+    ClearList();
+})
+
+function ClearList() {
+    invitedRef.get().then(function(querySnapshot) {
+        querySnapshot.forEach(doc => {
+            doc.ref.update({
+                czyPrzyjdzie: firebase.firestore.FieldValue.delete()
+            })
+        });
+    })
+}
