@@ -1,6 +1,10 @@
 {
+    "firestore": {
+        "rules": "firestore.rules",
+        "indexes": "firestore.indexes.json"
+    },
     "hosting": {
-        "site": "goscieweselni-2020",
+        "site": "milenaidaniel",
         "public": "public",
         "ignore": [
             "firebase.json",
