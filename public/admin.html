@@ -30,7 +30,7 @@
         // Your web app's Firebase configuration
         var firebaseConfig = {
             apiKey: "AIzaSyDoe2cT0kTG8H7NBDLBDBmIrlP976cbdhs",
-            authDomain: "goscieweselni-2020.firebaseapp.com",
+            authDomain: "milenaidaniel2020.firebaseapp.com",
             databaseURL: "https://goscieweselni-2020.firebaseio.com",
             projectId: "goscieweselni-2020",
             storageBucket: "goscieweselni-2020.appspot.com",
@@ -43,15 +43,23 @@
     </script>
     <!-- initialize script -->
     <script src="initialize.js"></script>
-    <script src="adminList.js"></script>
+
 
 
 </head>
 
 <body>
+    <div id="firebaseui-auth-container"></div>
     <div class="container">
-      
+        <div class="login">
+            <input class="login__input" type="text" placeholder="Login">
+        </div>
+        <div class="haslo">
+            <input class="haslo__input" type="text" placeholder="Hasło">
+        </div>
+        <button class="Loguj">Zaloguj się</button>
     </div>
+    <script src="adminList.js"></script>
 </body>
 
 </html>
