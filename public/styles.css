@@ -14,7 +14,14 @@ html {
     padding-top: 5px;
     text-align: center;
 }
-
+@font-face {
+    font-family: "Preside";
+    src: url("webfonts/PresideBold_PERSONAL_USE.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Canter";
+    src: url("webfonts/Canter-Bold.ttf") format("truetype");
+}
 body {
     background: url(pc.jpg);
     background-repeat: no-repeat;
@@ -32,6 +39,7 @@ body {
     align-items: center;
     margin-bottom: 10px;
     align-self: flex-end;
+    font-size: 1.2rem;
 }
 
 .buttonContainerBack {
@@ -47,8 +55,9 @@ body {
 }
 
 .container {
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Canter','Open Sans Condensed', sans-serif;
     color: white;
+    font-size: 1.5em;
     width: 700px;
     display: flex;
     flex-direction: column;
@@ -57,7 +66,9 @@ body {
     background-color: rgba(255, 255, 255, 0.5);
     margin: 20px 0 60px 0;
 }
-
+.mobileBreak {
+    display: none;
+}
 .przyjdzie {
     background-color: lightgreen;
 }
@@ -73,11 +84,16 @@ body {
 .guests {
     width: 200px;
     border-radius: 5px;
+    font-family: 'Canter';
+    font-size: 20px;
     padding: 5px;
 }
 
 .guestChoice {
     border-radius: 5px;
+    font-family: 'Canter';
+    font-size: 20px;
+    padding: 2px;
 }
 
 .guestContainer {
@@ -98,11 +114,12 @@ body {
 }
 
 .guestContainer__Name {
-    padding: 10px;
+padding: 5px;
+font-size: 1.0em;
+font-family: 'Preside';
     border-radius: 5px;
     border: none;
     width: 100%;
-    font-size: 1rem;
     letter-spacing: 2px;
 }
 
@@ -128,7 +145,7 @@ body {
 }
 
 .headerHead {
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Preside','Amatic SC', cursive;
 }
 
 hr {
@@ -136,7 +153,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #fff;
+    border-top: 2px solid #fff;
     margin: 1em 0;
     padding: 0;
 }
@@ -154,10 +171,8 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Amatic SC', cursive;
     font-size: 2em;
     height: 100%;
-    color: black;
     padding: 10px;
 }
 
@@ -181,25 +196,27 @@ hr {
 }
 
 .nextButton {
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Preside','Open Sans Condensed', sans-serif;
     border-radius: 5px;
     padding: 5px 20px 5px 20px;
     /* width: 40px; */
     background: transparent;
     outline: none;
     border: 1px solid white;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    color:white;
 }
 
 .nextButton2 {
-    font-family: 'Open Sans Condensed', sans-serif;
+    font-family: 'Preside','Open Sans Condensed', sans-serif;
     border-radius: 5px;
     padding: 5px 20px 5px 20px;
     /* width: 40px; */
     background: transparent;
     outline: none;
     border: 1px solid white;
-    font-size: 1.1em;
+    font-size: 1.2em;
+    color:white;
 }
 
 .backButton {
@@ -236,6 +253,7 @@ hr {
     flex-direction: row;
     align-items: center;
     width: 100%;
+    color:white;
 }
 
 .summaryListContainer {
@@ -243,10 +261,8 @@ hr {
     flex-direction: column;
     align-items: center;
     width: 50%;
-    font-family: 'Amatic SC', cursive;
     font-size: 2em;
     height: 100%;
-    color: black;
     letter-spacing: 3px;
     font-weight: bold;
     padding: 10px;
@@ -303,6 +319,9 @@ hr {
 }
 
 @media only screen and (max-width: 767px) {
+    .mobileBreak {
+        display: block;
+    }
     body {
         background-color: rgba(255, 255, 255, 0.2);
         background-blend-mode: overlay;
@@ -383,6 +402,9 @@ hr {
     }
     .sentence>p {
         margin: 0;
+    }
+    .header {
+        font-size: 1.2em;
     }
 }
 
