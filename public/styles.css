@@ -399,6 +399,7 @@ hr {
         display: block;
         margin-top: 100px;
         text-align: center;
+        margin-bottom: 100px;
     }
     .sentence>p {
         margin: 0;
